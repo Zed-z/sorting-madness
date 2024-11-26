@@ -12,11 +12,18 @@
     </parent>
 
     <groupId>szalenisortowacze</groupId>
-    <artifactId>sorting-madness</artifactId>
+    <artifactId>SortingMadness</artifactId>
+	
+    <packaging>war</packaging>
+	
     <version>1.0</version>
+    <name>Sorting Madness</name>
+	
 
-	<properties>
+    <properties>
         <java.version>11</java.version>
+	    <maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
     </properties>
 
     
@@ -47,6 +54,7 @@
 
 
     <build>
+	<finalName>SortingMadness</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
