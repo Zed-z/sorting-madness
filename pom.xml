@@ -18,6 +18,7 @@
 	
     <version>1.0</version>
     <name>Sorting Madness</name>
+    <description>A remote API for sorting data.</description>
 	
 
     <properties>
@@ -60,6 +61,19 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.21.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.11.1</version>
+                <configuration>
+                    <failOnError>false</failOnError>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -76,5 +90,45 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.4.0</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <developers>
+        <developer>
+            <id>inf156022</id>
+            <name>Student 156022</name>
+            <roles>
+                <role>Scrum Master</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>inf156080</id>
+            <name>Student 156080</name>
+            <roles>
+                <role>Project Administration, General Programming</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>inf155805</id>
+            <name>Student 155805</name>
+            <roles>
+                <role>REST API Programming</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>inf155871</id>
+            <name>Student 155871</name>
+            <roles>
+                <role>Algorithm Research and Development</role>
+            </roles>
+        </developer>
+    </developers>
 
 </project>
