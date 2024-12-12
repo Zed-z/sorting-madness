@@ -37,10 +37,10 @@ public class SortingStrategyMergeSort implements SortingStrategy {
         int i = 0, j = 0, k = 0;
         while (i < left && j < right) {
             if (comparator.compare(l[i], r[j])) {
-                objects[k++] = l[i++];
+                objects[k++] = r[j++];
             }
             else {
-                objects[k++] = r[j++];
+                objects[k++] = l[i++];
             }
         }
         while (i < left) {
