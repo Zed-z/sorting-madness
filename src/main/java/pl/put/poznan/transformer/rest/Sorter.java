@@ -33,6 +33,10 @@ public class Sorter {
                 SortingStrategySelectSort selectSort = new SortingStrategySelectSort();
                 selectSort.sort(sortedObjectsArray, sortingComparator);
                 break;
+            case "InsertionSort":
+                SortingStrategyInsertionSort insertionSort = new SortingStrategyInsertionSort();
+                insertionSort.sort(sortedObjectsArray, sortingComparator);
+                break;
             default:
                 logger.info("No such strategy.");
                 throw new IllegalArgumentException("No such strategy");

@@ -46,7 +46,8 @@ public class SortingController {
         logger.info("GET /sort/algorithms");
         List<String> algorithms = Arrays.asList(
                 "MergeSort",
-                "SelectSort"
+                "SelectSort",
+                "InsertionSort"
         );
         return ResponseEntity.ok(Map.of("algorithms", algorithms));
     }
