@@ -1,0 +1,15 @@
+meta {
+  name: Insertion Sort Example
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/sort
+  body: json
+  auth: none
+}
+
+body:json {
+  {"strategy": "InsertionSort", "comparator": "GreaterOrEqual", "objects": [{"a": 1, "b": "g"}, {"a": 2, "b": "a"}, {"a": 2, "b": "c"}], "criterion": "b"}
+}

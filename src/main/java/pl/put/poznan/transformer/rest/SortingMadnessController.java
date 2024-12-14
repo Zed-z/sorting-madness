@@ -4,7 +4,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.put.poznan.transformer.logic.SortedObject;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,9 +12,9 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/sort")
-public class SortingController {
+public class SortingMadnessController {
 
-    private static final Logger logger = LoggerFactory.getLogger(SortingController.class);
+    private static final Logger logger = LoggerFactory.getLogger(SortingMadnessController.class);
 
     @ControllerAdvice
     public static class GlobalExceptionHandler {
