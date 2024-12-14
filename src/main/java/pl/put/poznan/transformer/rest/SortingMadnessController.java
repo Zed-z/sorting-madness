@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.put.poznan.transformer.logic.SortingMadness;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,14 +31,14 @@ public class SortingMadnessController {
         }
     }
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public Map<String, List<Integer>> post(@RequestBody Sorter sorter) {
+    public Map<String, List<Integer>> post(@RequestBody SortingMadness sortingMadness) {
 
         logger.info("POST");
-        logger.info("Strategy: {}", sorter.getStrategy());
-        logger.info("Comparator: {}", sorter.getComparator());
-        logger.info("Criterion: {}", sorter.getCriterion());
-        logger.info("Objects: {}", sorter.getObjects());
-        return sorter.sort();
+        logger.info("Strategy: {}", sortingMadness.getStrategy());
+        logger.info("Comparator: {}", sortingMadness.getComparator());
+        logger.info("Criterion: {}", sortingMadness.getCriterion());
+        logger.info("Objects: {}", sortingMadness.getObjects());
+        return sortingMadness.sort();
 
     }
     @RequestMapping(method = RequestMethod.GET, value = "/algorithms", produces = "application/json")
