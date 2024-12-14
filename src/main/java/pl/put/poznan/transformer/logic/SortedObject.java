@@ -6,5 +6,8 @@ public abstract class SortedObject {
     public SortedObject(int index) {
         this.index = index;
     }
+    public int getIndex() {
+        return index;
+    }
 }
 
