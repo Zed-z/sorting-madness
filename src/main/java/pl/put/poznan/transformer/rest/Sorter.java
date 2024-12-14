@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.put.poznan.transformer.logic.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,10 +17,11 @@ public class Sorter {
     private List<Object> objects;
     private Comparator sortingComparator;
     SortedObject[] sortedObjectsArray;
+    List<Integer> indices;
 
     private static final Logger logger = LoggerFactory.getLogger(Sorter.class);
 
-    public SortedObject[] sort() {
+    public Map<String, List<Integer>> sort() {
     sortInit();
 
         switch (strategy) {
@@ -34,7 +37,18 @@ public class Sorter {
                 logger.info("No such strategy.");
                 throw new IllegalArgumentException("No such strategy");
         }
-        return sortedObjectsArray;
+        addIndices();
+        Map<String, List<Integer>> result = new HashMap<>();
+        result.put("indexes", indices);
+        return result;
+    }
+
+    public void addIndices() {
+        indices = new ArrayList<>();
+        for (SortedObject sortedObject : sortedObjectsArray) {
+            Integer index = sortedObject.getIndex();
+            indices.add(index);
+        }
     }
 
     public void sortInit() {

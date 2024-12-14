@@ -31,15 +31,14 @@ public class SortingController {
         }
     }
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public SortedObject[] post(@RequestBody Sorter sorter) {
+    public Map<String, List<Integer>> post(@RequestBody Sorter sorter) {
 
         logger.info("POST");
         logger.info("Strategy: {}", sorter.getStrategy());
         logger.info("Comparator: {}", sorter.getComparator());
         logger.info("Criterion: {}", sorter.getCriterion());
         logger.info("Objects: {}", sorter.getObjects());
-        SortedObject[] output = sorter.sort();
-        return output;
+        return sorter.sort();
 
     }
     @RequestMapping(method = RequestMethod.GET, value = "/algorithms", produces = "application/json")
