@@ -22,10 +22,10 @@ public class SortingStrategySelectSortTest {
 
         s.sort(objects, c);
 
-        assertEquals(0, objects[0].getValue());
-        assertEquals(1, objects[1].getValue());
-        assertEquals(2, objects[2].getValue());
-        assertEquals(3, objects[3].getValue());
+        assertEquals(3, objects[0].getValue());
+        assertEquals(2, objects[1].getValue());
+        assertEquals(1, objects[2].getValue());
+        assertEquals(0, objects[3].getValue());
 
     }
     @Test
@@ -41,11 +41,10 @@ public class SortingStrategySelectSortTest {
 
         s.sort(objects, c);
 
-        assertEquals(0, objects[0].getValue());
-        assertEquals(1, objects[1].getValue());
-        assertEquals(2, objects[2].getValue());
-        assertEquals(3, objects[3].getValue());
-
+        assertEquals(3, objects[0].getValue());
+        assertEquals(2, objects[1].getValue());
+        assertEquals(1, objects[2].getValue());
+        assertEquals(0, objects[3].getValue());
     }
     @Test
     public void sortLesserWorstCase(){
@@ -60,14 +59,13 @@ public class SortingStrategySelectSortTest {
 
         s.sort(objects, c);
 
-        assertEquals(3, objects[0].getValue());
-        assertEquals(2, objects[1].getValue());
-        assertEquals(1, objects[2].getValue());
-        assertEquals(0, objects[3].getValue());
-
+        assertEquals(0, objects[0].getValue());
+        assertEquals(1, objects[1].getValue());
+        assertEquals(2, objects[2].getValue());
+        assertEquals(3, objects[3].getValue());
     }
     @Test
-    public void sortLesserOrEqualAshaped(){
+    public void sortLesserAshaped(){
         SortedObjectInt[] objects = new SortedObjectInt[]{
                 new SortedObjectInt(0,0),
                 new SortedObjectInt(1,3),
@@ -75,14 +73,13 @@ public class SortingStrategySelectSortTest {
                 new SortedObjectInt(3,1),
         };
         SortingStrategy s = new SortingStrategySelectSort();
-        Comparator c = new ComparatorLesserOrEqual();
+        Comparator c = new ComparatorLesser();
 
         s.sort(objects, c);
 
-        assertEquals(3, objects[0].getValue());
-        assertEquals(2, objects[1].getValue());
-        assertEquals(1, objects[2].getValue());
-        assertEquals(0, objects[3].getValue());
-
+        assertEquals(0, objects[0].getValue());
+        assertEquals(1, objects[1].getValue());
+        assertEquals(2, objects[2].getValue());
+        assertEquals(3, objects[3].getValue());
     }
 }

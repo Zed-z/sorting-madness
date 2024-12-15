@@ -25,13 +25,13 @@ public class SortingStrategyQuickSort implements SortingStrategy {
 
         while(i <= j)
         {
-            while ( ! comparator.compare(objects[i],pivot)) {
+            while (comparator.compare(objects[i],pivot) < 0) {
                 if( i  < right)
                     i++;
                 else
                     break;
             }
-            while (  comparator.compare(objects[j],pivot)){
+            while (comparator.compare(objects[j],pivot) > 0){
                 if ( j > left)
                     j--;
                 else

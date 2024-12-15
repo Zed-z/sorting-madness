@@ -4,9 +4,9 @@ import java.util.Random;
 public class ComparatorRandom<T extends SortedObject> implements Comparator<T>{
 
     @Override
-    public boolean compare(T a, T b) {
+    public int compare(T a, T b) {
         Random r = new Random();
-        return r.nextBoolean();
+        return r.nextBoolean() ? 1 : 0;
     }
 
 }
