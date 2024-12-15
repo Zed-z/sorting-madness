@@ -1,0 +1,15 @@
+meta {
+  name: Double Sorting
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/sort
+  body: json
+  auth: none
+}
+
+body:json {
+  {"strategy": "InsertionSort", "comparator": "GreaterOrEqual", "objects": [{"a": 1.2, "b": "g"}, {"a": 2.0, "b": "a"}, {"a": 1.9, "b": "c"}], "criterion": "a"}
+}

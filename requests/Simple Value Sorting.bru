@@ -1,0 +1,15 @@
+meta {
+  name: Simple Value Sorting
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:8080/sort
+  body: json
+  auth: none
+}
+
+body:json {
+  {"strategy": "InsertionSort", "comparator": "GreaterOrEqual", "objects": [1, 5, 1.1, 6]}
+}

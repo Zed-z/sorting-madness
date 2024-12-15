@@ -88,48 +88,100 @@ public class SortingMadness {
 
 
     public List<SortedObject> generateObjectsToSort() {
-        List<SortedObject> sortedObjects = new java.util.ArrayList<>();
-        int index = 0;
+
+        // Get data types ----------------------------------------------------------------------------------------------
+        boolean intUsed = false;
+        boolean doubleUsed = false;
+        boolean stringUsed = false;
+
+        logger.debug("Data value types on criterion: {}", criterion);
         for (Object object : objects) {
-            logger.info("Criterion: {}", criterion);
-            logger.info("Sorting object: {}", object);
             if (object instanceof Map) {
                 Map<String, Object> map = (Map<String, Object>) object;
                 Object value = map.get(criterion);
-                if (value instanceof Integer) {
-                    logger.info("Value is a number: {}", value);
-                    SortedObjectInt sortedObjectInt = new SortedObjectInt(index, (Integer) value);
-                    sortedObjects.add(sortedObjectInt);
-                } else if (value instanceof String) {
-                    logger.info("Value is a string: {}", value);
-                    SortedObjectString sortedObjectStr = new SortedObjectString(index, (String) value);
-                    sortedObjects.add(sortedObjectStr);
-                } else {
-                    logger.warn("Value is not a number or string: {}", value);
-                    throw new IllegalArgumentException("Invalid data types (integer or string not found ).");
-                }
 
-                // Error check
-                Boolean stringCheck = false;
-                Boolean numberCheck = false;
+                logger.debug("{}", value.getClass().getSimpleName());
 
-                for (SortedObject sortedObjectString : sortedObjects) {
-
-                    if (sortedObjectString instanceof SortedObjectString) {
-                        stringCheck = true;
-                    }
-                    if (sortedObjectString instanceof SortedObjectInt) {
-                        numberCheck = true;
-                    }
-                    if (stringCheck && numberCheck) {
-                        logger.warn("Invalid data types (found string and number)");
-                        throw new IllegalArgumentException("Invalid data types (found string and number).");
-                    }
+                if (value.getClass().equals(Integer.class)) {
+                    intUsed = true;
+                } else if (value.getClass().equals(Float.class)) {
+                    doubleUsed = true;
+                } else if (value.getClass().equals(Double.class)) {
+                    doubleUsed = true;
+                } else if (value.getClass().equals(String.class)) {
+                    stringUsed = true;
                 }
 
             } else {
-                logger.warn("Object is not a Map: {}", object);
+
+                logger.debug("{}", object.getClass().getSimpleName());
+
+                if (object.getClass().equals(Integer.class)) {
+                    intUsed = true;
+                } else if (object.getClass().equals(Float.class)) {
+                    doubleUsed = true;
+                } else if (object.getClass().equals(Double.class)) {
+                    doubleUsed = true;
+                } else if (object.getClass().equals(String.class)) {
+                    stringUsed = true;
+                }
+
             }
+        }
+
+        Class<?> classToUse = null;
+        if (stringUsed) {
+            classToUse = String.class;
+        } else if (doubleUsed) {
+            classToUse = Double.class;
+        } else if (intUsed) {
+            classToUse = Integer.class;
+        }
+
+        if (stringUsed && (intUsed || doubleUsed)) {
+            logger.warn("Found mixed data types (numeric and string)!");
+            throw new IllegalArgumentException("Found mixed data types (numeric and string)!");
+        }
+
+        if (classToUse == null) {
+            logger.warn("Found incompatible data types!");
+            throw new IllegalArgumentException("Found incompatible data types!");
+        }
+
+        // Sort values -------------------------------------------------------------------------------------------------
+        List<SortedObject> sortedObjects = new ArrayList<>();
+        int index = 0;
+
+        for (Object object : objects) {
+            logger.debug("Criterion: {}", criterion);
+            logger.debug("Sorting object: {}", object);
+
+            Object value;
+            if (object instanceof Map) {
+                Map<String, Object> map = (Map<String, Object>) object;
+                value = map.get(criterion);
+            } else {
+                value = object;
+            }
+
+            logger.debug("Value: {}", value);
+
+            if (classToUse == Integer.class) {
+                SortedObjectInt sortedObjectInt = new SortedObjectInt(index, (Integer) value);
+                sortedObjects.add(sortedObjectInt);
+            } else if (classToUse == Double.class) {
+                if (value instanceof Integer) {
+                    SortedObjectDouble sortedObjectDouble = new SortedObjectDouble(index, ((Integer) value).doubleValue());
+                    sortedObjects.add(sortedObjectDouble);
+                } else if (value instanceof Float || value instanceof Double) {
+                    SortedObjectDouble sortedObjectDouble = new SortedObjectDouble(index, (Double) value);
+                    sortedObjects.add(sortedObjectDouble);
+                }
+            } else if (classToUse == String.class) {
+                SortedObjectString sortedObjectStr = new SortedObjectString(index, (String) value);
+                sortedObjects.add(sortedObjectStr);
+            }
+
             index++;
         }
 

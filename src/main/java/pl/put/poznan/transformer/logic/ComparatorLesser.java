@@ -5,6 +5,8 @@ public class ComparatorLesser<T extends SortedObject> implements Comparator<T> {
     public boolean compare(T a, T b) {
         if (a instanceof SortedObjectInt && b instanceof SortedObjectInt) {
             return ((SortedObjectInt) a).getValue() < ((SortedObjectInt) b).getValue();
+        } else if (a instanceof SortedObjectDouble && b instanceof SortedObjectDouble) {
+            return ((SortedObjectDouble) a).getValue() < ((SortedObjectDouble) b).getValue();
         } else if (a instanceof SortedObjectString && b instanceof SortedObjectString) {
             return ((SortedObjectString) a).getValue().compareToIgnoreCase(((SortedObjectString) b).getValue()) < 0;
         }

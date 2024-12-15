@@ -33,7 +33,7 @@ public class SortingMadnessController {
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     public Map<String, List<Integer>> post(@RequestBody SortingMadness sortingMadness) {
 
-        logger.info("POST");
+        logger.info("POST ------------------");
         logger.info("Strategy: {}", sortingMadness.getStrategy());
         logger.info("Comparator: {}", sortingMadness.getComparator());
         logger.info("Criterion: {}", sortingMadness.getCriterion());
