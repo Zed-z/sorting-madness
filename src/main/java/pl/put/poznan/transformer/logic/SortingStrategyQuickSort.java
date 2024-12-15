@@ -52,7 +52,7 @@ public class SortingStrategyQuickSort implements SortingStrategy {
 
         }
         if( left < j ) InternalSort(objects,comparator,left, j);
-        if( right > i ) InternalSort(objects,comparator,i,left);
+        if( right > i ) InternalSort(objects,comparator,i,right);
 
     }
 }
