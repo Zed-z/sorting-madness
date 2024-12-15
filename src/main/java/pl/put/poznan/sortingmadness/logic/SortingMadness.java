@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * The class responsible for preparing sorting objects, strategies and comparators
+ * Gets its data from the REST controller and returns the result of the selected parameters
+ */
 public class SortingMadness {
     private String strategy;
     private String comparator;
