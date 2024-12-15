@@ -1,0 +1,15 @@
+meta {
+  name: Auto Sort 2
+  type: http
+  seq: 13
+}
+
+post {
+  url: http://localhost:8080/sort
+  body: json
+  auth: none
+}
+
+body:json {
+  {"comparator": "Greater", "objects": ["z", "y", "f", "a"]}
+}

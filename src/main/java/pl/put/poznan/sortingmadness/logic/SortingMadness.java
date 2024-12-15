@@ -14,20 +14,38 @@ import java.util.Map;
  * Gets its data from the REST controller and returns the result of the selected parameters
  */
 public class SortingMadness {
+    /**
+     * The name of the sorting algorithm to use
+     */
     private String strategy;
+    /**
+     * The name of the comparator to use
+     */
     private String comparator;
+    /**
+     * The criterion to use (if complex objects are passed)
+     */
     private String criterion;
+    /**
+     * The list of provided objects / values
+     */
     private List<Object> objects;
+    /**
+     * The limit of steps to take when sorting
+     */
+    private Integer steps;
+
     private Comparator sortingComparator;
     SortedObject[] sortedObjectsArray;
-    List<Integer> indices;
+    private Class sortedObjectClass;
 
     private static final Logger logger = LoggerFactory.getLogger(SortingMadness.class);
 
-    public Map<String, List<Integer>> sort() {
-    sortInit();
+    public Map<String, Object> sort() {
+        sortInit();
 
-    SortingStrategy sortingStrategy = null;
+        SortingStrategy sortingStrategy = null;
+        if (strategy == null || strategy.equals("auto")) strategy = recommendStrategy();
         switch (strategy) {
             case "BubbleSort":
                 sortingStrategy = new SortingStrategyBubbleSort();
@@ -53,25 +71,28 @@ public class SortingMadness {
         }
 
         sortingStrategy.sort(sortedObjectsArray, sortingComparator);
-        addIndices();
 
-        Map<String, List<Integer>> result = new HashMap<>();
-        result.put("indexes", indices);
+        Map<String, Object> result = new HashMap<>();
+        result.put("indexes", getIndices());
+        result.put("strategy", strategy);
+        result.put("time", 0.0); // TODO
 
         return result;
     }
 
-    public void addIndices() {
-        indices = new ArrayList<>();
+    public List<Integer> getIndices() {
+        List<Integer> indices = new ArrayList<>();
         for (SortedObject sortedObject : sortedObjectsArray) {
             Integer index = sortedObject.getIndex();
             indices.add(index);
         }
+        return indices;
     }
 
     public void sortInit() {
         List<SortedObject> sortedObjects = generateObjectsToSort();
         this.sortedObjectsArray = sortedObjects.toArray(new SortedObject[0]);
+        this.sortedObjectClass = sortedObjects.get(0).getClass();
         this.sortingComparator = generateComparator();
     }
 
@@ -92,7 +113,6 @@ public class SortingMadness {
                 throw new IllegalArgumentException("Unknown comparator.");
         }
     }
-
 
     public List<SortedObject> generateObjectsToSort() {
 
@@ -195,6 +215,24 @@ public class SortingMadness {
         return sortedObjects;
     }
 
+    /**
+     * A function to recommend the sorting strategy to use base on data type and amount
+     * @return The name of the sort algorithm to use
+     */
+    public String recommendStrategy() {
+        if (sortedObjectClass == SortedObjectString.class) {
+            return "MergeSort";
+        }
+
+        if (objects.size() <= 10) {
+            return "InsertionSort";
+        } else if (objects.size() <= 100) {
+            return "QuickSort";
+        } else {
+            return "HeapSort";
+        }
+    }
+
     public String getStrategy() {
         return strategy;
     }
@@ -213,5 +251,9 @@ public class SortingMadness {
 
     public List<Object> getObjects() {
         return objects;
+    }
+
+    public Integer getSteps() {
+        return steps;
     }
 }
