@@ -1,9 +1,9 @@
 package pl.put.poznan.sortingmadness.logic;
 
+/**
+ * An implementation of the Merge Sort algorithm
+ */
 public class SortingStrategyMergeSort implements SortingStrategy {
-    public SortingStrategyMergeSort() {
-        super();
-    }
 
     @Override
     public void sort(SortedObject[] objects, Comparator comparator) {
@@ -11,6 +11,12 @@ public class SortingStrategyMergeSort implements SortingStrategy {
         mergeSort(objects, n, comparator);
     }
 
+    /**
+     * A recursive function to perform the Merge Sort algorithm
+     * @param objects An array of objects to sort
+     * @param n The size of the array
+     * @param comparator The comparator to use when sorting
+     */
     public static void mergeSort(SortedObject[] objects, int n, Comparator comparator) {
         if (n < 2) {
             return;
@@ -31,6 +37,15 @@ public class SortingStrategyMergeSort implements SortingStrategy {
         merge(objects, l, r, mid, n - mid, comparator);
     }
 
+    /**
+     * A function to merge two arrays of sorted objects together
+     * @param objects An array of objects to insert into
+     * @param l The sorted left input array
+     * @param r The sorted right input array
+     * @param left The size of the left array
+     * @param right The size of the right array
+     * @param comparator The comparator to use when sorting
+     */
     public static void merge(
             SortedObject[] objects, SortedObject[] l, SortedObject[] r, int left, int right, Comparator comparator) {
 

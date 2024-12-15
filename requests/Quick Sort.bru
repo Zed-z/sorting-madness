@@ -1,0 +1,15 @@
+meta {
+  name: Quick Sort
+  type: http
+  seq: 10
+}
+
+post {
+  url: http://localhost:8080/sort
+  body: json
+  auth: none
+}
+
+body:json {
+  {"strategy": "QuickSort", "comparator": "Greater", "objects": [1, 5, 1.1, 6]}
+}

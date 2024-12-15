@@ -6,8 +6,14 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * A test suite for testing the Bubble Sort algorithm
+ */
 class SortingStrategyBubbleSortTest {
 
+    /**
+     * A test to check correct sorting when using the Greater comparator
+     */
     @Test void sortGreater() {
         SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
                 new SortedObjectInt(0, 7),
@@ -29,6 +35,9 @@ class SortingStrategyBubbleSortTest {
         assertEquals(1, sortedObjects[3].getValue());
     }
 
+    /**
+     * A test to check correct sorting when using the Lesser comparator
+     */
     @Test void sortLess() {
         SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
                 new SortedObjectInt(0, 7),

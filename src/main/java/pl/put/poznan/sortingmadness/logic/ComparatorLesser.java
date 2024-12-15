@@ -1,5 +1,9 @@
 package pl.put.poznan.sortingmadness.logic;
 
+/**
+ * A comparator that causes lesser values to come first
+ * @param <T> The type of SortedObject to compare
+ */
 public class ComparatorLesser<T extends SortedObject> implements Comparator<T> {
     @Override
     public int compare(T a, T b) {

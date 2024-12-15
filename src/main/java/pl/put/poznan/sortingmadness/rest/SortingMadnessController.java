@@ -11,12 +11,19 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * A controller responsible for receiving requests and responding to them;
+ * Calls the SortingMadness class to do most of the work
+ */
 @RestController
 @RequestMapping("/sort")
 public class SortingMadnessController {
 
     private static final Logger logger = LoggerFactory.getLogger(SortingMadnessController.class);
 
+    /**
+     * An exception handler to respond to invalid data being sent
+     */
     @ControllerAdvice
     public static class GlobalExceptionHandler {
 

@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * The class responsible for preparing sorting objects, strategies and comparators;
+ * Gets its data from the REST controller and returns the result of the selected parameters
+ */
 public class SortingMadness {
     private String strategy;
     private String comparator;
@@ -23,26 +27,37 @@ public class SortingMadness {
     public Map<String, List<Integer>> sort() {
     sortInit();
 
+    SortingStrategy sortingStrategy = null;
         switch (strategy) {
-            case "MergeSort":
-                SortingStrategyMergeSort mergeSort = new SortingStrategyMergeSort();
-                mergeSort.sort(sortedObjectsArray, sortingComparator);
+            case "BubbleSort":
+                sortingStrategy = new SortingStrategyBubbleSort();
                 break;
-            case "SelectSort":
-                SortingStrategySelectSort selectSort = new SortingStrategySelectSort();
-                selectSort.sort(sortedObjectsArray, sortingComparator);
+            case "HeapSort":
+                sortingStrategy = new SortingStrategyHeapSort();
                 break;
             case "InsertionSort":
-                SortingStrategyInsertionSort insertionSort = new SortingStrategyInsertionSort();
-                insertionSort.sort(sortedObjectsArray, sortingComparator);
+                sortingStrategy = new SortingStrategyInsertionSort();
+                break;
+            case "MergeSort":
+                sortingStrategy = new SortingStrategyMergeSort();
+                break;
+            case "QuickSort":
+                sortingStrategy = new SortingStrategyQuickSort();
+                break;
+            case "SelectSort":
+                sortingStrategy = new SortingStrategySelectSort();
                 break;
             default:
-                logger.info("No such strategy.");
-                throw new IllegalArgumentException("No such strategy");
+                logger.error("Invalid sorting strategy!");
+                throw new IllegalArgumentException("Invalid sorting strategy!");
         }
+
+        sortingStrategy.sort(sortedObjectsArray, sortingComparator);
         addIndices();
+
         Map<String, List<Integer>> result = new HashMap<>();
         result.put("indexes", indices);
+
         return result;
     }
 
@@ -73,7 +88,7 @@ public class SortingMadness {
             case "Shorter":
                 return new ComparatorShorter();
             default:
-                logger.warn("Unknown comparator: {}", comparator);
+                logger.error("Unknown comparator: {}", comparator);
                 throw new IllegalArgumentException("Unknown comparator.");
         }
     }
@@ -131,12 +146,12 @@ public class SortingMadness {
         }
 
         if (stringUsed && (intUsed || doubleUsed)) {
-            logger.warn("Found mixed data types (numeric and string)!");
+            logger.error("Found mixed data types (numeric and string)!");
             throw new IllegalArgumentException("Found mixed data types (numeric and string)!");
         }
 
         if (classToUse == null) {
-            logger.warn("Found incompatible data types!");
+            logger.error("Found incompatible data types!");
             throw new IllegalArgumentException("Found incompatible data types!");
         }
 
@@ -196,10 +211,7 @@ public class SortingMadness {
         return criterion;
     }
 
-
     public List<Object> getObjects() {
         return objects;
     }
-
-
 }

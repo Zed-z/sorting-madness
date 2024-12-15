@@ -1,0 +1,15 @@
+meta {
+  name: Heap Sort
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:8080/sort
+  body: json
+  auth: none
+}
+
+body:json {
+  {"strategy": "HeapSort", "comparator": "Greater", "objects": [1, 5, 1.1, 6]}
+}
