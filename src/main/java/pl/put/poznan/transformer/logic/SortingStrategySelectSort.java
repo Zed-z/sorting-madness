@@ -19,7 +19,7 @@ public class SortingStrategySelectSort implements SortingStrategy {
     public int find_index(SortedObject[] objects, Comparator comparator, int start){
         int index = start;
         for(int j = start; j < objects.length; j++){
-            if(comparator.compare(objects[index], objects[j])){
+            if(comparator.compare(objects[index], objects[j]) > 0){
                 index = j;
             }
         }

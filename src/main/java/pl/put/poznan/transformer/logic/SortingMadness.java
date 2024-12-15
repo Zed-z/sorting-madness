@@ -62,24 +62,16 @@ public class SortingMadness {
 
     public Comparator generateComparator() {
         switch (comparator) {
-            case "GreaterOrEqual":
-                return new ComparatorGreaterOrEqual();
             case "Greater":
                 return new ComparatorGreater();
             case "Lesser":
                 return new ComparatorLesser();
-            case "LesserOrEqual":
-                return new ComparatorLesserOrEqual();
             case "Longer":
                 return new ComparatorLonger();
-            case "LongerOrEqual":
-                return new ComparatorLongerOrEqual();
             case "Random":
                 return new ComparatorRandom();
             case "Shorter":
                 return new ComparatorShorter();
-            case "ShorterOrEqual":
-                return new ComparatorShorterOrEqual();
             default:
                 logger.warn("Unknown comparator: {}", comparator);
                 throw new IllegalArgumentException("Unknown comparator.");

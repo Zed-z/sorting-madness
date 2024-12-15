@@ -13,25 +13,35 @@ public class ComparatorShorterTest {
     public static void setUp(){
         c = new ComparatorShorter();
     }
+
     @Test
-    public void shorterstring(){
+    public void longerString(){
+        assertTrue(c.compare(new SortedObjectString(0, "dluzszamalpa"), new SortedObjectString(1,"malpa")) == 1);
+    }
+
+    @Test
+    public void shorterString(){
         assertTrue(c.compare(new SortedObjectString(0, "malpa"),
-                new SortedObjectString(1,"dluzszamalpa")));
+                new SortedObjectString(1,"dluzszamalpa")) == -1);
     }
+
     @Test
-    public void equalstring(){
-        assertFalse(c.compare(new SortedObjectString(0, "malpa"),new SortedObjectString(1, "goryl")));
+    public void equalString(){
+        assertTrue(c.compare(new SortedObjectString(0, "malpa"),new SortedObjectString(1, "goryl")) == 0);
     }
+
     @Test
-    public void longerstring(){
-        assertFalse(c.compare(new SortedObjectString(0, "dluzszamalpa"), new SortedObjectString(1,"malpa")));
+    public void longerInt(){
+        assertTrue(c.compare(new SortedObjectInt(0,8008135), new SortedObjectInt(1, 68)) == 1);
     }
+
     @Test
-    public void longerint(){
-        assertFalse(c.compare(new SortedObjectInt(0,8008135), new SortedObjectInt(1, 68)));
+    public void shorterInt(){
+        assertTrue(c.compare(new SortedObjectInt(0,419), new SortedObjectInt(1, 8008135)) == -1);
     }
+
     @Test
-    public void shorterint(){
-        assertTrue(c.compare(new SortedObjectInt(0,419), new SortedObjectInt(1, 8008135)));
+    public void equalInt(){
+        assertTrue(c.compare(new SortedObjectInt(0,419), new SortedObjectInt(1, 419)) == 0);
     }
 }

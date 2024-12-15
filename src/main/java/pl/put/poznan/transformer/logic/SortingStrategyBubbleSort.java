@@ -9,7 +9,7 @@ public class SortingStrategyBubbleSort implements SortingStrategy {
     public void sort(SortedObject[] objects, Comparator comparator) {
         for (int i = 0; i < objects.length; i++) {
             for (int j = 0; j < objects.length; j++) {
-                if (comparator.compare(objects[j], objects[i])) {
+                if (comparator.compare(objects[j], objects[i]) > 0) {
                     SortedObject temp = objects[j];
                     objects[j] = objects[i];
                     objects[i] = temp;
