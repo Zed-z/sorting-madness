@@ -16,8 +16,13 @@ public class SortingStrategyQuickSort implements SortingStrategy {
 
     }
 
+    /**
+     * @param objects An array of objects to sort
+     * @param comparator The comparator to use when sorting
+     * @param left The left bound of the array
+     * @param right The right bound of the array
+     */
     private void InternalSort(SortedObject[] objects, Comparator comparator, int left, int right) {
-
 
         int i  = left;
         int j = right;

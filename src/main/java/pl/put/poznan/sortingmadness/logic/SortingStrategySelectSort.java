@@ -4,9 +4,7 @@ package pl.put.poznan.sortingmadness.logic;
  * An implementation of the Select Sort algorithm
  */
 public class SortingStrategySelectSort implements SortingStrategy {
-    public SortingStrategySelectSort() {
-        super();
-    }
+
     @Override
     public void sort(SortedObject[] objects, Comparator comparator) {
         for(int i = 0; i < objects.length; i++){
@@ -19,6 +17,14 @@ public class SortingStrategySelectSort implements SortingStrategy {
         }
 
     }
+
+    /**
+     * Finds an extremum in the array
+     * @param objects An array of objects to sort
+     * @param comparator The comparator to use when sorting
+     * @param start The index to start the search at
+     * @return The found index of the extremum
+     */
     public int find_index(SortedObject[] objects, Comparator comparator, int start){
         int index = start;
         for(int j = start; j < objects.length; j++){

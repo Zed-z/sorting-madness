@@ -8,7 +8,7 @@ interface SortingStrategy {
     /**
      * A function to sort provided objects using a defined comparator
      * @param objects An array of objects to sort
-     * @param comparator A comparator to use when sorting
+     * @param comparator The comparator to use when sorting
      */
     public void sort(SortedObject[] objects, Comparator comparator);
 

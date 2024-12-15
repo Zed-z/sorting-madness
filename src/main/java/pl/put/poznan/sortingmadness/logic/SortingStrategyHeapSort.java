@@ -1,11 +1,19 @@
 package pl.put.poznan.sortingmadness.logic;
 
+/**
+ * An implementation of the Bubble Sort algorithm
+ */
 public class SortingStrategyHeapSort implements SortingStrategy {
 
 
-
-
-    void heapify(SortedObject objects[],Comparator comparator, int n, int i)
+    /**
+     * A function to turn the object array into a heap
+     * @param objects An array of objects to sort
+     * @param comparator The comparator to use when sorting
+     * @param n The size of the array
+     * @param i The index of the element to use as the local vertex, its children have to be smaller than it
+     */
+    void heapify(SortedObject objects[], Comparator comparator, int n, int i)
     {
         int largest = i;
         int l = 2 * i + 1;
