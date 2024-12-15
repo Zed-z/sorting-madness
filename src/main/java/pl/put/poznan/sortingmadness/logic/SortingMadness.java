@@ -29,7 +29,8 @@ public class SortingMadness {
                 sortingStrategy = new SortingStrategyBubbleSort();
                 break;
             case "HeapSort":
-                break; // TODO
+                sortingStrategy = new SortingStrategyHeapSort();
+                break;
             case "InsertionSort":
                 sortingStrategy = new SortingStrategyInsertionSort();
                 break;
