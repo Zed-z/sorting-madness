@@ -11,8 +11,8 @@
         <version>2.3.3.RELEASE</version>
     </parent>
 
-    <groupId>szalenisortowacze</groupId>
-    <artifactId>SortingMadness</artifactId>
+    <groupId>pl.put.poznan</groupId>
+    <artifactId>sortingmadness</artifactId>
 	
     <packaging>war</packaging>
 	
