@@ -1,9 +1,9 @@
 package pl.put.poznan.sortingmadness.logic;
 
+/**
+ * An implementation of the Insertion Sort algorithm
+ */
 public class SortingStrategyInsertionSort implements SortingStrategy {
-    public SortingStrategyInsertionSort() {
-        super();
-    }
 
     @Override
     public void sort(SortedObject[] objects, Comparator comparator) {

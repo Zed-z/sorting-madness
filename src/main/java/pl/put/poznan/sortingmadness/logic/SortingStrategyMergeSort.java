@@ -1,9 +1,9 @@
 package pl.put.poznan.sortingmadness.logic;
 
+/**
+ * An implementation of the Merge Sort algorithm
+ */
 public class SortingStrategyMergeSort implements SortingStrategy {
-    public SortingStrategyMergeSort() {
-        super();
-    }
 
     @Override
     public void sort(SortedObject[] objects, Comparator comparator) {

@@ -1,7 +1,9 @@
 package pl.put.poznan.sortingmadness.logic;
 
+/**
+ * An implementation of the Quick Sort algorithm
+ */
 public class SortingStrategyQuickSort implements SortingStrategy {
-
 
     @Override
     public void sort(SortedObject[] objects, Comparator comparator) {

@@ -1,5 +1,8 @@
 package pl.put.poznan.sortingmadness.logic;
 
+/**
+ * An implementation of the Select Sort algorithm
+ */
 public class SortingStrategySelectSort implements SortingStrategy {
     public SortingStrategySelectSort() {
         super();

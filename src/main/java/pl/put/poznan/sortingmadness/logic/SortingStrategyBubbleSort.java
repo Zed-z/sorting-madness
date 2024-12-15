@@ -1,9 +1,9 @@
 package pl.put.poznan.sortingmadness.logic;
 
+/**
+ * An implementation of the Bubble Sort algorithm
+ */
 public class SortingStrategyBubbleSort implements SortingStrategy {
-    public SortingStrategyBubbleSort() {
-        super();
-    }
 
     @Override
     public void sort(SortedObject[] objects, Comparator comparator) {
