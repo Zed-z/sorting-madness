@@ -37,26 +37,45 @@ public class SortingMadnessController {
                     ));
         }
     }
+
+    /**
+     * @param sortingMadness The sorting controller
+     * @return A REST response
+     */
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public Map<String, List<Integer>> post(@RequestBody SortingMadness sortingMadness) {
+    public Map<String, Object> post(@RequestBody SortingMadness sortingMadness) {
 
         logger.info("POST ------------------");
         logger.info("Strategy: {}", sortingMadness.getStrategy());
         logger.info("Comparator: {}", sortingMadness.getComparator());
         logger.info("Criterion: {}", sortingMadness.getCriterion());
         logger.info("Objects: {}", sortingMadness.getObjects());
-        return sortingMadness.sort();
+        logger.info("Steps: {}", sortingMadness.getSteps());
+        logger.info("-----------------------");
 
+        Map<String, Object> response = sortingMadness.sort();
+        logger.info("Response: {}", response);
+        return response;
     }
+
+    /**
+     * @return A list of available sorting algorithms
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/algorithms", produces = "application/json")
     public ResponseEntity<?> getSortingAlgorithms() {
         logger.info("GET /sort/algorithms");
         List<String> algorithms = Arrays.asList(
+                "BubbleSort",
+                "HeapSort",
+                "InsertionSort",
                 "MergeSort",
-                "SelectSort",
-                "InsertionSort"
+                "QuickSort",
+                "SelectSort"
         );
-        return ResponseEntity.ok(Map.of("algorithms", algorithms));
+
+        ResponseEntity<Map<String, List<String>>> response = ResponseEntity.ok(Map.of("algorithms", algorithms));
+        logger.info("Response: {}", response);
+        return response;
     }
 
 }

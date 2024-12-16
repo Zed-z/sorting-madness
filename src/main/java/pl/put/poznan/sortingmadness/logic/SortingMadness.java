@@ -14,20 +14,38 @@ import java.util.Map;
  * Gets its data from the REST controller and returns the result of the selected parameters
  */
 public class SortingMadness {
+    /**
+     * The name of the sorting algorithm to use
+     */
     private String strategy;
+    /**
+     * The name of the comparator to use
+     */
     private String comparator;
+    /**
+     * The criterion to use (if complex objects are passed)
+     */
     private String criterion;
+    /**
+     * The list of provided objects / values
+     */
     private List<Object> objects;
+    /**
+     * The limit of steps to take when sorting
+     */
+    private Integer steps;
+
     private Comparator sortingComparator;
     SortedObject[] sortedObjectsArray;
-    List<Integer> indices;
+    private Class sortedObjectClass;
 
     private static final Logger logger = LoggerFactory.getLogger(SortingMadness.class);
 
-    public Map<String, List<Integer>> sort() {
-    sortInit();
+    public Map<String, Object> sort() {
+        sortInit();
 
-    SortingStrategy sortingStrategy = null;
+        SortingStrategy sortingStrategy = null;
+        if (strategy == null || strategy.equals("auto")) strategy = recommendStrategy();
         switch (strategy) {
             case "BubbleSort":
                 sortingStrategy = new SortingStrategyBubbleSort();
@@ -51,28 +69,34 @@ public class SortingMadness {
                 logger.error("Invalid sorting strategy!");
                 throw new IllegalArgumentException("Invalid sorting strategy!");
         }
+        logger.debug("Sorting strategy: " + sortingStrategy.getClass().getSimpleName());
 
         sortingStrategy.sort(sortedObjectsArray, sortingComparator);
-        addIndices();
 
-        Map<String, List<Integer>> result = new HashMap<>();
-        result.put("indexes", indices);
+        Map<String, Object> result = new HashMap<>();
+        result.put("indexes", getIndices());
+        result.put("strategy", strategy);
+        result.put("time", 0.0); // TODO
 
         return result;
     }
 
-    public void addIndices() {
-        indices = new ArrayList<>();
+    public List<Integer> getIndices() {
+        List<Integer> indices = new ArrayList<>();
         for (SortedObject sortedObject : sortedObjectsArray) {
             Integer index = sortedObject.getIndex();
             indices.add(index);
         }
+        return indices;
     }
 
     public void sortInit() {
         List<SortedObject> sortedObjects = generateObjectsToSort();
         this.sortedObjectsArray = sortedObjects.toArray(new SortedObject[0]);
+        this.sortedObjectClass = sortedObjects.get(0).getClass();
         this.sortingComparator = generateComparator();
+
+        logger.debug("Comparator: " + sortingComparator.getClass().getSimpleName());
     }
 
     public Comparator generateComparator() {
@@ -93,7 +117,6 @@ public class SortingMadness {
         }
     }
 
-
     public List<SortedObject> generateObjectsToSort() {
 
         // Get data types ----------------------------------------------------------------------------------------------
@@ -101,13 +124,13 @@ public class SortingMadness {
         boolean doubleUsed = false;
         boolean stringUsed = false;
 
-        logger.debug("Data value types on criterion: {}", criterion);
+        logger.debug("Data value types:");
         for (Object object : objects) {
             if (object instanceof Map) {
                 Map<String, Object> map = (Map<String, Object>) object;
                 Object value = map.get(criterion);
 
-                logger.debug("{}", value.getClass().getSimpleName());
+                logger.debug(" - {}", value.getClass().getSimpleName());
 
                 if (value.getClass().equals(Integer.class)) {
                     intUsed = true;
@@ -121,7 +144,7 @@ public class SortingMadness {
 
             } else {
 
-                logger.debug("{}", object.getClass().getSimpleName());
+                logger.debug(" - {}", object.getClass().getSimpleName());
 
                 if (object.getClass().equals(Integer.class)) {
                     intUsed = true;
@@ -155,13 +178,14 @@ public class SortingMadness {
             throw new IllegalArgumentException("Found incompatible data types!");
         }
 
+        logger.debug("Using type: {}", classToUse.getSimpleName());
+
         // Sort values -------------------------------------------------------------------------------------------------
         List<SortedObject> sortedObjects = new ArrayList<>();
         int index = 0;
 
+        logger.debug("Objects:");
         for (Object object : objects) {
-            logger.debug("Criterion: {}", criterion);
-            logger.debug("Sorting object: {}", object);
 
             Object value;
             if (object instanceof Map) {
@@ -171,7 +195,7 @@ public class SortingMadness {
                 value = object;
             }
 
-            logger.debug("Value: {}", value);
+            logger.debug(" - {}: {}", object, value);
 
             if (classToUse == Integer.class) {
                 SortedObjectInt sortedObjectInt = new SortedObjectInt(index, (Integer) value);
@@ -195,6 +219,24 @@ public class SortingMadness {
         return sortedObjects;
     }
 
+    /**
+     * A function to recommend the sorting strategy to use base on data type and amount
+     * @return The name of the sort algorithm to use
+     */
+    public String recommendStrategy() {
+        if (sortedObjectClass == SortedObjectString.class) {
+            return "MergeSort";
+        }
+
+        if (objects.size() <= 10) {
+            return "InsertionSort";
+        } else if (objects.size() <= 100) {
+            return "QuickSort";
+        } else {
+            return "HeapSort";
+        }
+    }
+
     public String getStrategy() {
         return strategy;
     }
@@ -213,5 +255,9 @@ public class SortingMadness {
 
     public List<Object> getObjects() {
         return objects;
+    }
+
+    public Integer getSteps() {
+        return steps;
     }
 }
