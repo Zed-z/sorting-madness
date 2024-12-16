@@ -19,6 +19,9 @@ import java.util.Map;
 @RequestMapping("/sort")
 public class SortingMadnessController {
 
+    /**
+     * A handle to the logger
+     */
     private static final Logger logger = LoggerFactory.getLogger(SortingMadnessController.class);
 
     /**
