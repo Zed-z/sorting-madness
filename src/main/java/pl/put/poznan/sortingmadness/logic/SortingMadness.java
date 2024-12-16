@@ -56,6 +56,8 @@ public class SortingMadness {
     public Map<String, Object> sort() {
         sortInit();
 
+
+
         List<Map<String, Object>> results = new ArrayList<>();
 
         if (algorithms==null || algorithms.isEmpty()) {
@@ -176,9 +178,18 @@ public class SortingMadness {
         boolean doubleUsed = false;
         boolean stringUsed = false;
 
+        if (objects == null || objects.isEmpty()) {
+            logger.error("No objects provided for sorting");
+            throw new IllegalArgumentException("No objects provided for sorting");
+        }
+
         logger.debug("Data value types:");
         for (Object object : objects) {
             if (object instanceof Map) {
+                if (criterion == null) {
+                    logger.error("No criterion provided for sorting");
+                    throw new IllegalArgumentException("No criterion provided for sorting");
+                }
                 Map<String, Object> map = (Map<String, Object>) object;
                 Object value = map.get(criterion);
 
