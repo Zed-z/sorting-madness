@@ -3,10 +3,7 @@ package pl.put.poznan.sortingmadness.logic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -100,7 +97,8 @@ public class SortingMadness {
         this.sortedObjectClass = sortedObjects.get(0).getClass();
         this.sortingComparator = generateComparator();
 
-        logger.debug("Comparator: " + sortingComparator.getClass().getSimpleName());
+        logger.debug("Object array to sort: {}", Arrays.toString(sortedObjectsArray));
+        logger.debug("Comparator: {}", sortingComparator.getClass().getSimpleName());
     }
 
     public Comparator generateComparator() {

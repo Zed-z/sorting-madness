@@ -22,4 +22,9 @@ public class SortedObjectInt extends SortedObject {
     public int getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return "<" + index + ":" + value + ">";
+    }
 }

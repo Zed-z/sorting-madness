@@ -22,4 +22,9 @@ public class SortedObjectDouble extends SortedObject {
     public double getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return "<" + index + ":" + value + ">";
+    }
 }
