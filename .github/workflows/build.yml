@@ -43,13 +43,12 @@ jobs:
 
     - name: Zip Site
       run: |
-        cd target/site
-        zip -r ../../SortingMadnessDocumentation.zip ./
+        zip -r ./target/SortingMadnessDocumentation.zip ./target/site/*
     
     - name: Upload Site
       uses: actions/upload-artifact@v3
       with:
-        name: SortingMadness-docs
+        name: SortingMadnessDocumentation
         path: ./target/SortingMadnessDocumentation.zip
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
