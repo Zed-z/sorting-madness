@@ -27,7 +27,7 @@ jobs:
 
     - name: Zip Site
       run: |
-        zip -j -r ./target/SortingMadnessDocumentation.zip ./target/site/*
+        zip -r ./target/SortingMadnessDocumentation.zip ./target/site/*
 
   release:
     name: Create GitHub Release
