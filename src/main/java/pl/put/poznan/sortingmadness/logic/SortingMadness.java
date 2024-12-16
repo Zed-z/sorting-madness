@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
-
 /**
  * The class responsible for preparing sorting objects, strategies and comparators;
  * Gets its data from the REST controller and returns the result of the selected parameters
@@ -14,7 +13,7 @@ public class SortingMadness {
     /**
      * The name of the sorting algorithm to use
      */
-    private String strategy;
+    private List<String> algorithms;
     /**
      * The name of the comparator to use
      */
@@ -57,56 +56,70 @@ public class SortingMadness {
     public Map<String, Object> sort() {
         sortInit();
 
-        SortingStrategy sortingStrategy = null;
-        if (strategy == null || strategy.equals("auto")) strategy = recommendStrategy();
-        switch (strategy) {
-            case "BubbleSort":
-                sortingStrategy = new SortingStrategyBubbleSort();
-                break;
-            case "HeapSort":
-                sortingStrategy = new SortingStrategyHeapSort();
-                break;
-            case "InsertionSort":
-                sortingStrategy = new SortingStrategyInsertionSort();
-                break;
-            case "MergeSort":
-                sortingStrategy = new SortingStrategyMergeSort();
-                break;
-            case "QuickSort":
-                sortingStrategy = new SortingStrategyQuickSort();
-                break;
-            case "SelectSort":
-                sortingStrategy = new SortingStrategySelectSort();
-                break;
-            default:
-                logger.error("Invalid sorting strategy!");
-                throw new IllegalArgumentException("Invalid sorting strategy!");
-        }
-        logger.debug("Sorting strategy: " + sortingStrategy.getClass().getSimpleName());
+        List<Map<String, Object>> results = new ArrayList<>();
 
-        if (steps == null) {
-            sortingStrategy.sort(sortedObjectsArray, sortingComparator);
-        } else {
-            sortingStrategy.sort(sortedObjectsArray, sortingComparator, steps);
+        for (String algorithm : algorithms) {
+            SortingStrategy sortingStrategy;
+            switch (algorithm) {
+                case "BubbleSort":
+                    sortingStrategy = new SortingStrategyBubbleSort();
+                    break;
+                case "HeapSort":
+                    sortingStrategy = new SortingStrategyHeapSort();
+                    break;
+                case "InsertionSort":
+                    sortingStrategy = new SortingStrategyInsertionSort();
+                    break;
+                case "MergeSort":
+                    sortingStrategy = new SortingStrategyMergeSort();
+                    break;
+                case "QuickSort":
+                    sortingStrategy = new SortingStrategyQuickSort();
+                    break;
+                case "SelectSort":
+                    sortingStrategy = new SortingStrategySelectSort();
+                    break;
+                default:
+                    logger.error("Invalid sorting strategy: {}", algorithm);
+                    throw new IllegalArgumentException("Invalid sorting strategy: " + algorithm);
+            }
+
+            logger.debug("Sorting strategy: " + sortingStrategy.getClass().getSimpleName());
+
+            // copied so every sorting has its own array to work on
+            SortedObject[] objectsToSort = Arrays.copyOf(sortedObjectsArray, sortedObjectsArray.length);
+
+            long startTime = System.nanoTime();
+            if (steps == null) {
+                sortingStrategy.sort(objectsToSort, sortingComparator);
+            } else {
+                sortingStrategy.sort(objectsToSort, sortingComparator, steps);
+            }
+            long endTime = System.nanoTime();
+            double timeElapsed = (endTime - startTime) / 1_000_000.0;
+
+            Map<String, Object> singleResult = new HashMap<>();
+            singleResult.put("algorithm", algorithm);
+            singleResult.put("indexes", getIndices(objectsToSort));
+            singleResult.put("time", timeElapsed);
+            results.add(singleResult);
         }
 
         Map<String, Object> result = new HashMap<>();
-        result.put("indexes", getIndices());
-        result.put("strategy", strategy);
-        result.put("time", 0.0); // TODO
+        result.put("results", results);
 
         return result;
     }
+
 
     /**
      * Generates a list of indices based on the sorted order of objects
      * @return A list of ordered object indices
      */
-    public List<Integer> getIndices() {
+    public List<Integer> getIndices(SortedObject[] objectsToSort) {
         List<Integer> indices = new ArrayList<>();
-        for (SortedObject sortedObject : sortedObjectsArray) {
-            Integer index = sortedObject.getIndex();
-            indices.add(index);
+        for (SortedObject sortedObject : objectsToSort) {
+            indices.add(sortedObject.getIndex());
         }
         return indices;
     }
@@ -151,7 +164,6 @@ public class SortingMadness {
      * @return List of SortedObjects
      */
     public List<SortedObject> generateObjectsToSort() {
-
         // Get data types ----------------------------------------------------------------------------------------------
         boolean intUsed = false;
         boolean doubleUsed = false;
@@ -271,11 +283,11 @@ public class SortingMadness {
     }
 
     /**
-     * Getter for the strategy
-     * @return The strategy
+     * Getter for the algorithms
+     * @return The algorithms
      */
-    public String getStrategy() {
-        return strategy;
+    public List<String> getAlgorithms() {
+        return algorithms;
     }
 
     /**

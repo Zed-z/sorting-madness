@@ -55,7 +55,8 @@ public class SortingMadnessController {
     public Map<String, Object> post(@RequestBody SortingMadness sortingMadness) {
 
         logger.info("POST ------------------");
-        logger.info("Strategy: {}", sortingMadness.getStrategy());
+//        logger.info("Strategy: {}", sortingMadness.getStrategies());
+        logger.info("Strategy: {}", sortingMadness.getAlgorithms());
         logger.info("Comparator: {}", sortingMadness.getComparator());
         logger.info("Criterion: {}", sortingMadness.getCriterion());
         logger.info("Objects: {}", sortingMadness.getObjects());
