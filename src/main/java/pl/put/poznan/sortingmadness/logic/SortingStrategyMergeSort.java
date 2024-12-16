@@ -11,6 +11,7 @@ public class SortingStrategyMergeSort implements SortingStrategy {
         mergeSort(objects, n, comparator);
     }
 
+    @Override
     public void sort(SortedObject[] objects, Comparator comparator, int steps) {
         int n = objects.length;
         mergeSort(objects, n, comparator, steps);
@@ -42,6 +43,14 @@ public class SortingStrategyMergeSort implements SortingStrategy {
 
         merge(objects, l, r, mid, n - mid, comparator);
     }
+
+    /**
+     * A recursive function to perform the Merge Sort algorithm, with a step limit
+     * @param objects An array of objects to sort
+     * @param n The size of the array
+     * @param comparator The comparator to use when sorting
+     * @param steps The step limit
+     */
     public static void mergeSort(SortedObject[] objects, int n, Comparator comparator, int steps) {
         if (n < 2) {
             return;
@@ -62,6 +71,7 @@ public class SortingStrategyMergeSort implements SortingStrategy {
         }
         merge(objects, l, r, mid, n - mid, comparator);
     }
+
     /**
      * A function to merge two arrays of sorted objects together
      * @param objects An array of objects to insert into

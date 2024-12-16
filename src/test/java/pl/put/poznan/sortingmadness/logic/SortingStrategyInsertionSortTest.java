@@ -4,8 +4,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test suite for the Insertion Sort algorithm
+ */
 class SortingStrategyInsertionSortTest {
 
+    /**
+     * Test to check sorting with the Greater comparator
+     */
     @Test
     void sortGreater() {
         SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
@@ -25,6 +31,9 @@ class SortingStrategyInsertionSortTest {
         assertEquals(1, sortedObjects[3].getValue());
     }
 
+    /**
+     * Test to check sorting with the Lesser comparator
+     */
     @Test
     void sortLesser() {
         SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
@@ -44,6 +53,9 @@ class SortingStrategyInsertionSortTest {
         assertEquals(16, sortedObjects[3].getValue());
     }
 
+    /**
+     * Test to check sorting with the Shorter comparator
+     */
     @Test
     void sortShorter() {
         SortedObjectString[] sortedObjects = new SortedObjectString[]{
@@ -64,6 +76,9 @@ class SortingStrategyInsertionSortTest {
         assertEquals("aaaa", sortedObjects[3].getValue());
     }
 
+    /**
+     * Test to check sorting with the Longer comparator
+     */
     @Test
     void sortLonger() {
         SortedObjectString[] sortedObjects = new SortedObjectString[]{

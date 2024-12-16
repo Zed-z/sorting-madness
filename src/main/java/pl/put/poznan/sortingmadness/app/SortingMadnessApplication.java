@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SortingMadnessApplication {
 
     /**
+     * The entry point for the app
      * @param args Command line arguments; currently unused
      */
     public static void main(String[] args) {

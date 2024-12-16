@@ -38,6 +38,10 @@ public class SortingMadness {
 
     private static final Logger logger = LoggerFactory.getLogger(SortingMadness.class);
 
+    /**
+     * Does the sorting, as requested by the REST API
+     * @return JSON response to the request
+     */
     public Map<String, Object> sort() {
         sortInit();
 
@@ -82,6 +86,10 @@ public class SortingMadness {
         return result;
     }
 
+    /**
+     * Generates a list of indices based on the sorted order of objects
+     * @return A list of ordered object indices
+     */
     public List<Integer> getIndices() {
         List<Integer> indices = new ArrayList<>();
         for (SortedObject sortedObject : sortedObjectsArray) {
@@ -91,6 +99,9 @@ public class SortingMadness {
         return indices;
     }
 
+    /**
+     * Initializes objects and the comparator used for sorting
+     */
     public void sortInit() {
         List<SortedObject> sortedObjects = generateObjectsToSort();
         this.sortedObjectsArray = sortedObjects.toArray(new SortedObject[0]);
@@ -101,6 +112,10 @@ public class SortingMadness {
         logger.debug("Comparator: {}", sortingComparator.getClass().getSimpleName());
     }
 
+    /**
+     * Decodes a string name to a comparator object
+     * @return The comparator decoded from the string
+     */
     public Comparator generateComparator() {
         switch (comparator) {
             case "Greater":
@@ -119,6 +134,10 @@ public class SortingMadness {
         }
     }
 
+    /**
+     * Converts objects from the REST API request into a list of SortedObjects
+     * @return List of SortedObjects
+     */
     public List<SortedObject> generateObjectsToSort() {
 
         // Get data types ----------------------------------------------------------------------------------------------
@@ -239,26 +258,50 @@ public class SortingMadness {
         }
     }
 
+    /**
+     * Getter for the strategy
+     * @return The strategy
+     */
     public String getStrategy() {
         return strategy;
     }
 
+    /**
+     * Getter for the comparator
+     * @return The comparator
+     */
     public String getComparator() {
         return comparator;
     }
 
+    /**
+     * Setter for the compataror
+     * @param comparator The comparator to set
+     */
     public void setComparator(String comparator) {
         this.comparator = comparator;
     }
 
+    /**
+     * Getter for the criterion
+     * @return The criterion
+     */
     public String getCriterion() {
         return criterion;
     }
 
+    /**
+     * Getter for the raw object list
+     * @return The raw object list
+     */
     public List<Object> getObjects() {
         return objects;
     }
 
+    /**
+     * Getter for the sorting steps amount
+     * @return The sorting steps amount
+     */
     public Integer getSteps() {
         return steps;
     }

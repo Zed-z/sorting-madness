@@ -27,6 +27,11 @@ public class SortingMadnessController {
     @ControllerAdvice
     public static class GlobalExceptionHandler {
 
+        /**
+         * The entity to respond with the error to
+         * @param ex The exception object
+         * @return A REST response
+         */
         @ExceptionHandler(IllegalArgumentException.class)
         public ResponseEntity<?> handleIllegalArgumentException(IllegalArgumentException ex) {
             return ResponseEntity
@@ -39,6 +44,7 @@ public class SortingMadnessController {
     }
 
     /**
+     * A POST request to sort objects remotely
      * @param sortingMadness The sorting controller
      * @return A REST response
      */
@@ -59,6 +65,7 @@ public class SortingMadnessController {
     }
 
     /**
+     * A GET request to get a list of available sorting algorithms
      * @return A list of available sorting algorithms
      */
     @RequestMapping(method = RequestMethod.GET, value = "/algorithms", produces = "application/json")

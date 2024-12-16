@@ -6,8 +6,14 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test suite for testing the Merge Sort algorithms
+ */
 class SortingStrategyMergeSortTest {
 
+    /**
+     * Test to check sorting with the Greater comparator
+     */
     @Test void sortGreater() {
         SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
                 new SortedObjectInt(0, 7),
@@ -29,6 +35,9 @@ class SortingStrategyMergeSortTest {
         assertEquals(1, sortedObjects[3].getValue());
     }
 
+    /**
+     * Test to check sorting with the Lesser comparator
+     */
     @Test void sortLess() {
         SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
                 new SortedObjectInt(0, 7),

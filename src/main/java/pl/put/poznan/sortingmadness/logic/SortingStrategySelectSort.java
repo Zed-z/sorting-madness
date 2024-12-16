@@ -39,7 +39,7 @@ public class SortingStrategySelectSort implements SortingStrategy {
      * @param start The index to start the search at
      * @return The found index of the extremum
      */
-    public int find_index(SortedObject[] objects, Comparator comparator, int start){
+    public int find_index(SortedObject[] objects, Comparator comparator, int start) {
         int index = start;
         for(int j = start; j < objects.length; j++){
             if(comparator.compare(objects[index], objects[j]) > 0){

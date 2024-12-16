@@ -22,6 +22,7 @@ public class SortingStrategyQuickSort implements SortingStrategy {
     }
 
     /**
+     * A recursive function to perform the Quick Sort algorithm
      * @param objects An array of objects to sort
      * @param comparator The comparator to use when sorting
      * @param left The left bound of the array
@@ -66,6 +67,14 @@ public class SortingStrategyQuickSort implements SortingStrategy {
 
     }
 
+    /**
+     * A recursive function to perform the Quick Sort algorithm, with a step limit
+     * @param objects An array of objects to sort
+     * @param comparator The comparator to use when sorting
+     * @param left The left bound of the array
+     * @param right The right bound of the array
+     * @param steps The step limit
+     */
     private void InternalSort(SortedObject[] objects, Comparator comparator, int left, int right, int steps) {
 
         int i  = left;
