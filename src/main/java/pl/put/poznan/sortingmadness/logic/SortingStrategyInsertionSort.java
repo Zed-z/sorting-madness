@@ -28,6 +28,7 @@ public class SortingStrategyInsertionSort implements SortingStrategy {
                 j--;
             }
             objects[j + 1] = key;
+            if(steps--<=0) break;
         }
     }
 }

@@ -27,6 +27,7 @@ public class SortingStrategySelectSort implements SortingStrategy {
                 objects[i] = objects[index];
                 objects[index] = temp;
             }
+            if(steps--<=0) break;
         }
 
     }

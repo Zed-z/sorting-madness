@@ -13,7 +13,7 @@ public class SortingStrategyMergeSort implements SortingStrategy {
 
     public void sort(SortedObject[] objects, Comparator comparator, int steps) {
         int n = objects.length;
-        mergeSort(objects, n, comparator);
+        mergeSort(objects, n, comparator, steps);
     }
 
     /**
@@ -36,12 +36,32 @@ public class SortingStrategyMergeSort implements SortingStrategy {
         for (int i = mid; i < n; i++) {
             r[i - mid] = objects[i];
         }
+
         mergeSort(l, mid, comparator);
         mergeSort(r, n - mid, comparator);
 
         merge(objects, l, r, mid, n - mid, comparator);
     }
+    public static void mergeSort(SortedObject[] objects, int n, Comparator comparator, int steps) {
+        if (n < 2) {
+            return;
+        }
+        int mid = n / 2;
+        SortedObject[] l = new SortedObject[mid];
+        SortedObject[] r = new SortedObject[n - mid];
 
+        for (int i = 0; i < mid; i++) {
+            l[i] = objects[i];
+        }
+        for (int i = mid; i < n; i++) {
+            r[i - mid] = objects[i];
+        }
+        if(steps-- > 0) {
+            mergeSort(l, mid, comparator,steps);
+            mergeSort(r, n - mid, comparator,steps);
+        }
+        merge(objects, l, r, mid, n - mid, comparator);
+    }
     /**
      * A function to merge two arrays of sorted objects together
      * @param objects An array of objects to insert into

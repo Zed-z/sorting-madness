@@ -28,6 +28,7 @@ public class SortingStrategyBubbleSort implements SortingStrategy {
                     objects[i] = temp;
                 }
             }
+            if(steps-- <= 0) break;
         }
     }
 }
