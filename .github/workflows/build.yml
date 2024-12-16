@@ -42,8 +42,7 @@ jobs:
 
     - name: Zip Site
       run: |
-        cd ./target/site
-        zip -r ../../SortingMadnessDocumentation.zip ./*
+        zip -j -r ./target/SortingMadnessDocumentation.zip ./target/site/*
     
     - name: Upload Site
       uses: actions/upload-artifact@v3
