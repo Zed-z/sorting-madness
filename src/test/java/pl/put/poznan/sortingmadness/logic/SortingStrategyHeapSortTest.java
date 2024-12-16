@@ -9,6 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class SortingStrategyHeapSortTest {
 
 
+    /**
+     * Tests to verify compatibility with value based comparator Greater
+     */
     @Test
     void sortGreater() {
         SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
@@ -27,7 +30,9 @@ class SortingStrategyHeapSortTest {
         assertEquals(6, sortedObjects[2].getValue());
         assertEquals(1, sortedObjects[3].getValue());
     }
-
+    /**
+     * Tests  to verify compatibility with value based comparator Lesser
+     */
     @Test
     void sortLesser() {
         SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
@@ -47,6 +52,9 @@ class SortingStrategyHeapSortTest {
         assertEquals(16, sortedObjects[3].getValue());
     }
 
+    /**
+     * Tests  to verify compatibility with string length comparator Shorter
+     */
     @Test
     void sortShorter() {
         SortedObjectString[] sortedObjects = new SortedObjectString[]{
@@ -66,6 +74,9 @@ class SortingStrategyHeapSortTest {
         assertEquals("aaa", sortedObjects[2].getValue());
         assertEquals("aaaa", sortedObjects[3].getValue());
     }
+    /**
+     * Tests to verify compatibility with string length comparator Longer
+     */
 
     @Test
     void sortLonger() {

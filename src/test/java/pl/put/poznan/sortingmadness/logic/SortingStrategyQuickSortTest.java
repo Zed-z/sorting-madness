@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SortingStrategyQuickSortTest {
 
+
+    /**
+     * Tests to verify compatibility with value based comparator Greater
+     */
     @Test
     void sortGreater() {
         SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
@@ -25,6 +29,9 @@ class SortingStrategyQuickSortTest {
         assertEquals(1, sortedObjects[3].getValue());
     }
 
+    /**
+     * Tests  to verify compatibility with value based comparator Lesser
+     */
     @Test
     void sortLesser() {
         SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
@@ -44,6 +51,9 @@ class SortingStrategyQuickSortTest {
         assertEquals(16, sortedObjects[3].getValue());
     }
 
+    /**
+     * Tests  to verify compatibility with string length comparator Shorter
+     */
     @Test
     void sortShorter() {
         SortedObjectString[] sortedObjects = new SortedObjectString[]{
@@ -64,6 +74,9 @@ class SortingStrategyQuickSortTest {
         assertEquals("aaaa", sortedObjects[3].getValue());
     }
 
+    /**
+     * Tests to verify compatibility with string length comparator Longer
+     */
     @Test
     void sortLonger() {
         SortedObjectString[] sortedObjects = new SortedObjectString[]{
