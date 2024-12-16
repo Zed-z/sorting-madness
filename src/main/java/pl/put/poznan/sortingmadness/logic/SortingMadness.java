@@ -71,7 +71,11 @@ public class SortingMadness {
         }
         logger.debug("Sorting strategy: " + sortingStrategy.getClass().getSimpleName());
 
-        sortingStrategy.sort(sortedObjectsArray, sortingComparator);
+        if (steps == null) {
+            sortingStrategy.sort(sortedObjectsArray, sortingComparator);
+        } else {
+            sortingStrategy.sort(sortedObjectsArray, sortingComparator, steps);
+        }
 
         Map<String, Object> result = new HashMap<>();
         result.put("indexes", getIndices());

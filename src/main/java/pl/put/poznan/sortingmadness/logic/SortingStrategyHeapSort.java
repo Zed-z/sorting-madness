@@ -58,4 +58,26 @@ public class SortingStrategyHeapSort implements SortingStrategy {
         }
 
     }
+
+    @Override
+    public void sort(SortedObject[] objects, Comparator comparator, int steps) {
+
+        int n = objects.length;
+
+
+        for (int i = n / 2 - 1; i >= 0; i--)
+            heapify(objects,comparator, n, i);
+
+
+        for (int i = n - 1; i >= 0; i--) {
+
+            SortedObject temp = objects[0];
+            objects[0] = objects[i];
+            objects[i] = temp;
+
+
+            heapify(objects,comparator, i, 0);
+        }
+
+    }
 }

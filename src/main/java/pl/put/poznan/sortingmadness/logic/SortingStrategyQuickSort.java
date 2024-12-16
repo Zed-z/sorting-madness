@@ -7,13 +7,18 @@ public class SortingStrategyQuickSort implements SortingStrategy {
 
     @Override
     public void sort(SortedObject[] objects, Comparator comparator) {
-
         int q = objects.length -1;
         int p = 0;
 
         InternalSort(objects,comparator,p,q);
+    }
 
+    @Override
+    public void sort(SortedObject[] objects, Comparator comparator, int steps) {
+        int q = objects.length -1;
+        int p = 0;
 
+        InternalSort(objects,comparator,p,q);
     }
 
     /**

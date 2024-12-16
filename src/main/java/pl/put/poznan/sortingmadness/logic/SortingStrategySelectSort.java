@@ -18,6 +18,19 @@ public class SortingStrategySelectSort implements SortingStrategy {
 
     }
 
+    @Override
+    public void sort(SortedObject[] objects, Comparator comparator, int steps) {
+        for(int i = 0; i < objects.length; i++){
+            int index = find_index(objects, comparator, i);
+            if(index != i){
+                SortedObject temp = objects[i];
+                objects[i] = objects[index];
+                objects[index] = temp;
+            }
+        }
+
+    }
+
     /**
      * Finds an extremum in the array
      * @param objects An array of objects to sort

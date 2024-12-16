@@ -11,6 +11,11 @@ public class SortingStrategyMergeSort implements SortingStrategy {
         mergeSort(objects, n, comparator);
     }
 
+    public void sort(SortedObject[] objects, Comparator comparator, int steps) {
+        int n = objects.length;
+        mergeSort(objects, n, comparator);
+    }
+
     /**
      * A recursive function to perform the Merge Sort algorithm
      * @param objects An array of objects to sort
