@@ -69,6 +69,7 @@ public class SortingMadness {
                 logger.error("Invalid sorting strategy!");
                 throw new IllegalArgumentException("Invalid sorting strategy!");
         }
+        logger.debug("Sorting strategy: " + sortingStrategy.getClass().getSimpleName());
 
         sortingStrategy.sort(sortedObjectsArray, sortingComparator);
 
@@ -94,6 +95,8 @@ public class SortingMadness {
         this.sortedObjectsArray = sortedObjects.toArray(new SortedObject[0]);
         this.sortedObjectClass = sortedObjects.get(0).getClass();
         this.sortingComparator = generateComparator();
+
+        logger.debug("Comparator: " + sortingComparator.getClass().getSimpleName());
     }
 
     public Comparator generateComparator() {
@@ -121,13 +124,13 @@ public class SortingMadness {
         boolean doubleUsed = false;
         boolean stringUsed = false;
 
-        logger.debug("Data value types on criterion: {}", criterion);
+        logger.debug("Data value types:");
         for (Object object : objects) {
             if (object instanceof Map) {
                 Map<String, Object> map = (Map<String, Object>) object;
                 Object value = map.get(criterion);
 
-                logger.debug("{}", value.getClass().getSimpleName());
+                logger.debug(" - {}", value.getClass().getSimpleName());
 
                 if (value.getClass().equals(Integer.class)) {
                     intUsed = true;
@@ -141,7 +144,7 @@ public class SortingMadness {
 
             } else {
 
-                logger.debug("{}", object.getClass().getSimpleName());
+                logger.debug(" - {}", object.getClass().getSimpleName());
 
                 if (object.getClass().equals(Integer.class)) {
                     intUsed = true;
@@ -175,13 +178,14 @@ public class SortingMadness {
             throw new IllegalArgumentException("Found incompatible data types!");
         }
 
+        logger.debug("Using type: {}", classToUse.getSimpleName());
+
         // Sort values -------------------------------------------------------------------------------------------------
         List<SortedObject> sortedObjects = new ArrayList<>();
         int index = 0;
 
+        logger.debug("Objects:");
         for (Object object : objects) {
-            logger.debug("Criterion: {}", criterion);
-            logger.debug("Sorting object: {}", object);
 
             Object value;
             if (object instanceof Map) {
@@ -191,7 +195,7 @@ public class SortingMadness {
                 value = object;
             }
 
-            logger.debug("Value: {}", value);
+            logger.debug(" - {}: {}", object, value);
 
             if (classToUse == Integer.class) {
                 SortedObjectInt sortedObjectInt = new SortedObjectInt(index, (Integer) value);
