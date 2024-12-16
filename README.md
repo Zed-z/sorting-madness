@@ -3,4 +3,6 @@ Aplikacja służąca do sortowania zbiorów danych różnymi algorytmami. Ma pom
 
 Członkowie: 156022, 156080, 155805, 155871
 
-## Stan integracji: ![maven](https://github.com/Zed-z/sorting-madness/actions/workflows/maven.yml/badge.svg)
+Build: ![maven](https://github.com/Zed-z/sorting-madness/actions/workflows/build.yml/badge.svg)
+
+Release: ![maven](https://github.com/Zed-z/sorting-madness/actions/workflows/release.yml/badge.svg)
