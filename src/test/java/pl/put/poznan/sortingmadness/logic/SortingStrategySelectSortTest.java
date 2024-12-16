@@ -4,8 +4,14 @@ package pl.put.poznan.sortingmadness.logic;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Test suite for testing the Select Sort algorithm
+ */
 public class SortingStrategySelectSortTest {
+
+    /**
+    * test to verify compatibility with ComparatorGreater, best case data
+     */
     @Test
     public void sortGreaterBestCase(){
         SortedObjectInt[] objects = new SortedObjectInt[]{
@@ -25,6 +31,9 @@ public class SortingStrategySelectSortTest {
         assertEquals(0, objects[3].getValue());
 
     }
+    /**
+     * test to verify compatibility with ComparatorGreater, worst case data
+     */
     @Test
     public void sortGreaterWorstCase(){
         SortedObjectInt[] objects = new SortedObjectInt[]{
@@ -43,6 +52,9 @@ public class SortingStrategySelectSortTest {
         assertEquals(1, objects[2].getValue());
         assertEquals(0, objects[3].getValue());
     }
+    /**
+     * test to verify compatibility with ComparatorLesser, worst case data
+     */
     @Test
     public void sortLesserWorstCase(){
         SortedObjectInt[] objects = new SortedObjectInt[]{
@@ -61,6 +73,9 @@ public class SortingStrategySelectSortTest {
         assertEquals(2, objects[2].getValue());
         assertEquals(3, objects[3].getValue());
     }
+    /**
+     * test to verify compatibility with ComparatorLesser, data A-shaped (first growing then falling)
+     */
     @Test
     public void sortLesserAshaped(){
         SortedObjectInt[] objects = new SortedObjectInt[]{
