@@ -58,6 +58,11 @@ public class SortingMadness {
 
         List<Map<String, Object>> results = new ArrayList<>();
 
+        if (algorithms==null || algorithms.isEmpty()) {
+            algorithms = new ArrayList<>();
+            algorithms.add(recommendStrategy());
+            logger.debug("Recommended sorting strategy: {}", algorithms.get(0));
+        }
         for (String algorithm : algorithms) {
             SortingStrategy sortingStrategy;
             switch (algorithm) {
@@ -142,6 +147,8 @@ public class SortingMadness {
      * @return The comparator decoded from the string
      */
     public Comparator generateComparator() {
+
+        if (comparator==null) { throw new IllegalArgumentException("Please specify the comparator.");}
         switch (comparator) {
             case "Greater":
                 return new ComparatorGreater();
