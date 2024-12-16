@@ -32,10 +32,22 @@ public class SortingMadness {
      */
     private Integer steps;
 
+    /**
+     * The comparator to be used when sorting
+     */
     private Comparator sortingComparator;
+    /**
+     * The array of objects to be used when sorting
+     */
     SortedObject[] sortedObjectsArray;
+    /**
+     * The class of objects to be sorted
+     */
     private Class sortedObjectClass;
 
+    /**
+     * A handle to the logger
+     */
     private static final Logger logger = LoggerFactory.getLogger(SortingMadness.class);
 
     /**
