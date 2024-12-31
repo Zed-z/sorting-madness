@@ -1,11 +1,14 @@
 package pl.put.poznan.sortingmadness.logic;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+import static org.mockito.Mockito.*;
 /**
  * A test suite for testing the Bubble Sort algorithm
  */
@@ -59,4 +62,65 @@ class SortingStrategyBubbleSortTest {
         assertEquals(7, sortedObjects[3].getValue());
     }
 
+
+    @Test
+    void checkComparisonCount() {
+
+        Comparator comparator = mock(Comparator.class);
+
+        when(comparator.compare(any(), any())).thenReturn(0);
+
+
+
+
+        SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
+                new SortedObjectInt(0, 7),
+                new SortedObjectInt(1, 3),
+                new SortedObjectInt(2, 5),
+                new SortedObjectInt(3, 1)
+        };
+
+        SortingStrategy sortingStrategy = new SortingStrategyBubbleSort();
+
+
+        sortingStrategy.sort(sortedObjects, comparator);
+
+        System.out.println(Arrays.toString(sortedObjects));
+
+
+
+        verify(comparator, times(16)).compare(any(), any());
+
+    }
+
+
+    @Test
+    void checkComparisonCountWithSteps() {
+
+        Comparator comparator = mock(Comparator.class);
+
+        when(comparator.compare(any(), any())).thenReturn(0);
+
+
+
+
+        SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
+                new SortedObjectInt(0, 7),
+                new SortedObjectInt(1, 3),
+                new SortedObjectInt(2, 5),
+                new SortedObjectInt(3, 1)
+        };
+
+        SortingStrategy sortingStrategy = new SortingStrategyBubbleSort();
+
+
+        sortingStrategy.sort(sortedObjects, comparator,1);
+
+        System.out.println(Arrays.toString(sortedObjects));
+
+
+
+        verify(comparator, times(8)).compare(any(), any());
+
+    }
 }
