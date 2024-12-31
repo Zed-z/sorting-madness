@@ -59,4 +59,25 @@ class SortingStrategyMergeSortTest {
         assertEquals(7, sortedObjects[3].getValue());
     }
 
+    @Test
+    void SortWithRandom(){
+        SortedObjectString[] sortedObjects = new SortedObjectString[]{
+                new SortedObjectString(0, "aaaa"),
+                new SortedObjectString(1, "aaaaaaa"),
+                new SortedObjectString(2, "aa"),
+                new SortedObjectString(3, "aaaaa")
+        };
+
+
+        SortingStrategy sortingStrategy = new SortingStrategyMergeSort();
+        Comparator comparator = new ComparatorRandom();
+        assertDoesNotThrow(
+
+                () -> {
+                    sortingStrategy.sort(sortedObjects, comparator);
+                }
+        );
+
+    }
+
 }

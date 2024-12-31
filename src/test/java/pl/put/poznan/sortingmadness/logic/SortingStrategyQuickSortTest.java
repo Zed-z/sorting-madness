@@ -100,4 +100,49 @@ class SortingStrategyQuickSortTest {
         assertEquals("aa", sortedObjects[3].getValue());
     }
 
+    @Test
+    void SortAlreadySorted(){
+        SortedObjectString[] sortedObjects = new SortedObjectString[]{
+                new SortedObjectString(0, "aa"),
+                new SortedObjectString(1, "aaa"),
+                new SortedObjectString(2, "aaaa"),
+                new SortedObjectString(3, "aaaaa")
+        };
+
+
+        SortingStrategy sortingStrategy = new SortingStrategyQuickSort();
+        Comparator comparator = new ComparatorGreater();
+        sortingStrategy.sort(sortedObjects, comparator);
+
+
+        assertEquals("aa", sortedObjects[0].getValue());
+        assertEquals("aaa", sortedObjects[1].getValue());
+        assertEquals("aaaa", sortedObjects[2].getValue());
+        assertEquals("aaaaa", sortedObjects[3].getValue());
+
+    }
+
+    @Test
+    void SortWithRandom(){
+        SortedObjectString[] sortedObjects = new SortedObjectString[]{
+                new SortedObjectString(0, "aaaa"),
+                new SortedObjectString(1, "aaaaaaa"),
+                new SortedObjectString(2, "aa"),
+                new SortedObjectString(3, "aaaaa")
+        };
+
+
+        SortingStrategy sortingStrategy = new SortingStrategyQuickSort();
+        Comparator comparator = new ComparatorRandom();
+        assertDoesNotThrow(
+
+                () -> {
+                    sortingStrategy.sort(sortedObjects, comparator);
+                }
+        );
+
+    }
+
+
+
 }
