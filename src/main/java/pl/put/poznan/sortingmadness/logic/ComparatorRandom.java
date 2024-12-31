@@ -10,7 +10,7 @@ public class ComparatorRandom<T extends SortedObject> implements Comparator<T>{
     @Override
     public int compare(T a, T b) {
         Random r = new Random();
-        return r.nextBoolean() ? 1 : 0;
+        return r.nextInt(2) + -1;
     }
 
 }

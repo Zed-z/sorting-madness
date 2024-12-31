@@ -3,7 +3,7 @@ package pl.put.poznan.sortingmadness.logic;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 /**
- * Test suite for testing the ComparatorGreater
+ * Test suite for testing the ComparatorLonger
  */
 public class ComparatorLongerTest {
     public static Comparator c;
