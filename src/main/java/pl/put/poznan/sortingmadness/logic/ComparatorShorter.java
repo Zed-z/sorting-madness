@@ -8,17 +8,23 @@ public class ComparatorShorter<T extends SortedObject> implements Comparator<T> 
     @Override
     public int compare(T a, T b) {
         if (a instanceof SortedObjectInt && b instanceof SortedObjectInt) {
-            if (String.valueOf(((SortedObjectInt) a).getValue()).length() > String.valueOf(((SortedObjectInt) b).getValue()).length()) return 1;
-            if (String.valueOf(((SortedObjectInt) a).getValue()).length() < String.valueOf(((SortedObjectInt) b).getValue()).length()) return -1;
-            if (String.valueOf(((SortedObjectInt) a).getValue()).length() == String.valueOf(((SortedObjectInt) b).getValue()).length()) return 0;
+            int valueA = String.valueOf(((SortedObjectInt) a).getValue()).length();
+            int valueB = String.valueOf(((SortedObjectInt) b).getValue()).length();
+            if (valueA > valueB) return 1;
+            if (valueA < valueB) return -1;
+            if (valueA == valueB) return 0;
         } else if (a instanceof SortedObjectDouble && b instanceof SortedObjectDouble) {
-            if (String.valueOf(((SortedObjectDouble) a).getValue()).length() > String.valueOf(((SortedObjectDouble) b).getValue()).length()) return 1;
-            if (String.valueOf(((SortedObjectDouble) a).getValue()).length() < String.valueOf(((SortedObjectDouble) b).getValue()).length()) return -1;
-            if (String.valueOf(((SortedObjectDouble) a).getValue()).length() == String.valueOf(((SortedObjectDouble) b).getValue()).length()) return 0;
+            int valueA = String.valueOf(((SortedObjectDouble) a).getValue()).length();
+            int valueB = String.valueOf(((SortedObjectDouble) b).getValue()).length();
+            if (valueA > valueB) return 1;
+            if (valueA < valueB) return -1;
+            if (valueA == valueB) return 0;
         } else if (a instanceof SortedObjectString && b instanceof SortedObjectString) {
-            if (((SortedObjectString) a).getValue().length() > (((SortedObjectString) b).getValue()).length()) return 1;
-            if (((SortedObjectString) a).getValue().length() < (((SortedObjectString) b).getValue()).length()) return -1;
-            if (((SortedObjectString) a).getValue().length() == (((SortedObjectString) b).getValue()).length()) return 0;
+            int valueA = ((SortedObjectString) a).getValue().length();
+            int valueB = ((SortedObjectString) b).getValue().length();
+            if (valueA > valueB) return 1;
+            if (valueA < valueB) return -1;
+            if (valueA == valueB) return 0;
         }
         throw new IllegalArgumentException();
     }
