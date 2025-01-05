@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 /**
  * Test suite for the Heap Sort algorithm
@@ -101,5 +104,36 @@ class SortingStrategyHeapSortTest {
         assertEquals("aa", sortedObjects[3].getValue());
     }
 
+
+
+    @Test
+    void checkComparisonCount() {
+
+        Comparator comparator = mock(Comparator.class);
+
+        when(comparator.compare(any(), any())).thenReturn(0);
+
+
+
+
+        SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
+                new SortedObjectInt(0, 7),
+                new SortedObjectInt(1, 3),
+                new SortedObjectInt(2, 5),
+                new SortedObjectInt(3, 1)
+        };
+
+        SortingStrategy sortingStrategy = new SortingStrategySelectSort();
+
+
+        sortingStrategy.sort(sortedObjects, comparator);
+
+        System.out.println(Arrays.toString(sortedObjects));
+
+
+
+        verify(comparator, atLeast(sortedObjects.length)).compare(any(), any());
+
+    }
 
 }
