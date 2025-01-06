@@ -2,8 +2,12 @@ package pl.put.poznan.sortingmadness.logic;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Arrays;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 /**
  * Test suite for the Insertion Sort algorithm
  */
@@ -97,6 +101,44 @@ class SortingStrategyInsertionSortTest {
         assertEquals("aaaaa", sortedObjects[1].getValue());
         assertEquals("aaaa", sortedObjects[2].getValue());
         assertEquals("aa", sortedObjects[3].getValue());
+    }
+
+    @Test
+    void checkComparisonCount() {
+        Comparator comparator = mock(Comparator.class);
+        assertEquals(comparator.compare(any(), any()), 0);
+        SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
+                new SortedObjectInt(0, 7),
+                new SortedObjectInt(1, 3),
+                new SortedObjectInt(2, 5),
+                new SortedObjectInt(3, 1)
+
+        };
+        SortingStrategyInsertionSort sortingStrategy = new SortingStrategyInsertionSort();
+        sortingStrategy.sort(sortedObjects, comparator);
+        System.out.println(Arrays.toString(sortedObjects));
+        verify(comparator, times(4)).compare(any(), any());
+
+
+    }
+
+    @Test
+    void checkComparisonWithSteps() {
+        Comparator comparator = mock(Comparator.class);
+        assertEquals(comparator.compare(any(), any()), 0);
+        SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
+                new SortedObjectInt(0, 7),
+                new SortedObjectInt(1, 3),
+                new SortedObjectInt(2, 5),
+                new SortedObjectInt(3, 1)
+
+        };
+        SortingStrategyInsertionSort sortingStrategy = new SortingStrategyInsertionSort();
+        sortingStrategy.sort(sortedObjects, comparator, 1);
+        System.out.println(Arrays.toString(sortedObjects));
+        verify(comparator, times(3)).compare(any(), any());
+
+
     }
 
 

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 /**
  * Test suite for testing the Merge Sort algorithms
@@ -79,5 +81,44 @@ class SortingStrategyMergeSortTest {
         );
 
     }
+
+    @Test
+    void checkComparisonCount() {
+        Comparator comparator = mock(Comparator.class);
+        assertEquals(comparator.compare(any(), any()), 0);
+        SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
+                new SortedObjectInt(0, 7),
+                new SortedObjectInt(1, 3),
+                new SortedObjectInt(2, 5),
+                new SortedObjectInt(3, 1)
+
+        };
+        SortingStrategyMergeSort sortingStrategy = new SortingStrategyMergeSort();
+        sortingStrategy.sort(sortedObjects, comparator);
+        System.out.println(Arrays.toString(sortedObjects));
+        verify(comparator, times(5)).compare(any(), any());
+
+
+    }
+
+    @Test
+    void checkComparisonWithSteps() {
+        Comparator comparator = mock(Comparator.class);
+        assertEquals(comparator.compare(any(), any()), 0);
+        SortedObjectInt[] sortedObjects = new SortedObjectInt[]{
+                new SortedObjectInt(0, 7),
+                new SortedObjectInt(1, 3),
+                new SortedObjectInt(2, 5),
+                new SortedObjectInt(3, 1)
+
+        };
+        SortingStrategyMergeSort sortingStrategy = new SortingStrategyMergeSort();
+        sortingStrategy.sort(sortedObjects, comparator, 1);
+        System.out.println(Arrays.toString(sortedObjects));
+        verify(comparator, times(5)).compare(any(), any());
+
+
+    }
+
 
 }
