@@ -120,5 +120,23 @@ class SortingStrategyMergeSortTest {
 
     }
 
+    /**
+     * Test for a potential edge case where an empty list is given
+     */
+    @Test
+    void emptyEdgeCaseTest() {
+        // Random comparator, doesn't matter
+        Comparator comparator = mock(Comparator.class);
+        when(comparator.compare(any(), any())).thenReturn(0);
 
+        SortedObjectInt[] sortedObjects = new SortedObjectInt[]{};
+        SortingStrategy sortingStrategy = new SortingStrategyMergeSort();
+        sortingStrategy.sort(sortedObjects, comparator);
+
+        // Should return empty list
+        assertEquals(0, sortedObjects.length);
+
+        // Comaparator shouldn't be used
+        verify(comparator, times(0)).compare(any(), any());
+    }
 }
