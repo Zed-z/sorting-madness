@@ -123,6 +123,8 @@ class SortingStrategyHeapSortTest {
                 new SortedObjectInt(3, 1)
         };
 
+
+
         SortingStrategy sortingStrategy = new SortingStrategySelectSort();
 
 
