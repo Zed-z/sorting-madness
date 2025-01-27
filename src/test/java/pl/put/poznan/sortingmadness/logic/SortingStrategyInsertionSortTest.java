@@ -103,6 +103,9 @@ class SortingStrategyInsertionSortTest {
         assertEquals("aa", sortedObjects[3].getValue());
     }
 
+    /**
+     * Test to check if comparator has been used enough times
+     */
     @Test
     void checkComparisonCount() {
         Comparator comparator = mock(Comparator.class);
@@ -122,6 +125,10 @@ class SortingStrategyInsertionSortTest {
 
     }
 
+    /**
+     * Test to check if comparator has been used enough times
+     * This time with a step limit
+     */
     @Test
     void checkComparisonWithSteps() {
         Comparator comparator = mock(Comparator.class);

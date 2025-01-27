@@ -106,6 +106,9 @@ class SortingStrategyQuickSortTest {
         assertEquals("aa", sortedObjects[3].getValue());
     }
 
+    /**
+     * Test to try and sort already sorted data
+     */
     @Test
     void SortAlreadySorted(){
         SortedObjectString[] sortedObjects = new SortedObjectString[]{
@@ -128,6 +131,10 @@ class SortingStrategyQuickSortTest {
 
     }
 
+
+    /**
+     * Test to try and sort randomly arranged data
+     */
     @Test
     void SortWithRandom(){
         SortedObjectString[] sortedObjects = new SortedObjectString[]{
@@ -149,6 +156,9 @@ class SortingStrategyQuickSortTest {
 
     }
 
+    /**
+     * Test to check if comparator has been used enough times
+     */
     @Test
     void checkComparisonCount() {
 

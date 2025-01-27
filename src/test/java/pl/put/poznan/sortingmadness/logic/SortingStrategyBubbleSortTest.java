@@ -63,6 +63,9 @@ class SortingStrategyBubbleSortTest {
     }
 
 
+    /**
+     * Test to check if comparator has been used enough times
+     */
     @Test
     void checkComparisonCount() {
 
@@ -94,6 +97,10 @@ class SortingStrategyBubbleSortTest {
     }
 
 
+    /**
+     * Test to check if comparator has been used enough times
+     * This time with a step limit
+     */
     @Test
     void checkComparisonCountWithSteps() {
 

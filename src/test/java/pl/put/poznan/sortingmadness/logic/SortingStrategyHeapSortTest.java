@@ -83,7 +83,6 @@ class SortingStrategyHeapSortTest {
     /**
      * Tests to verify compatibility with string length comparator Longer
      */
-
     @Test
     void sortLonger() {
         SortedObjectString[] sortedObjects = new SortedObjectString[]{
@@ -106,6 +105,9 @@ class SortingStrategyHeapSortTest {
 
 
 
+    /**
+     * Test to check if comparator has been used enough times
+     */
     @Test
     void checkComparisonCount() {
 

@@ -101,8 +101,9 @@ public class SortingStrategySelectSortTest {
         assertEquals(3, objects[3].getValue());
     }
 
-
-
+    /**
+     * Test to check if comparator has been used enough times
+     */
     @Test
     void checkComparisonCount() {
 
@@ -133,7 +134,10 @@ public class SortingStrategySelectSortTest {
 
     }
 
-
+    /**
+     * Test to check if comparator has been used enough times
+     * This time with a step limit
+     */
     @Test
     void checkComparisonCountWithSteps() {
 
