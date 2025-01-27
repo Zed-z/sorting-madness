@@ -61,6 +61,9 @@ class SortingStrategyMergeSortTest {
         assertEquals(7, sortedObjects[3].getValue());
     }
 
+    /**
+     * Test to try and sort randomly arranged data
+     */
     @Test
     void SortWithRandom(){
         SortedObjectString[] sortedObjects = new SortedObjectString[]{
@@ -82,6 +85,9 @@ class SortingStrategyMergeSortTest {
 
     }
 
+    /**
+     * Test to check if comparator has been used enough times
+     */
     @Test
     void checkComparisonCount() {
         Comparator comparator = mock(Comparator.class);
@@ -101,6 +107,10 @@ class SortingStrategyMergeSortTest {
 
     }
 
+    /**
+     * Test to check if comparator has been used enough times
+     * This time with a step limit
+     */
     @Test
     void checkComparisonWithSteps() {
         Comparator comparator = mock(Comparator.class);
@@ -120,5 +130,23 @@ class SortingStrategyMergeSortTest {
 
     }
 
+    /**
+     * Test for a potential edge case where an empty list is given
+     */
+    @Test
+    void emptyEdgeCaseTest() {
+        // Random comparator, doesn't matter
+        Comparator comparator = mock(Comparator.class);
+        when(comparator.compare(any(), any())).thenReturn(0);
 
+        SortedObjectInt[] sortedObjects = new SortedObjectInt[]{};
+        SortingStrategy sortingStrategy = new SortingStrategyMergeSort();
+        sortingStrategy.sort(sortedObjects, comparator);
+
+        // Should return empty list
+        assertEquals(0, sortedObjects.length);
+
+        // Comaparator shouldn't be used
+        verify(comparator, times(0)).compare(any(), any());
+    }
 }

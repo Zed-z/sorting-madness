@@ -63,6 +63,9 @@ class SortingStrategyBubbleSortTest {
     }
 
 
+    /**
+     * Test to check if comparator has been used enough times
+     */
     @Test
     void checkComparisonCount() {
 
@@ -94,6 +97,10 @@ class SortingStrategyBubbleSortTest {
     }
 
 
+    /**
+     * Test to check if comparator has been used enough times
+     * This time with a step limit
+     */
     @Test
     void checkComparisonCountWithSteps() {
 
@@ -124,5 +131,23 @@ class SortingStrategyBubbleSortTest {
 
     }
 
+    /**
+     * Test for a potential edge case where an empty list is given
+     */
+    @Test
+    void emptyEdgeCaseTest() {
+        // Random comparator, doesn't matter
+        Comparator comparator = mock(Comparator.class);
+        when(comparator.compare(any(), any())).thenReturn(0);
 
+        SortedObjectInt[] sortedObjects = new SortedObjectInt[]{};
+        SortingStrategy sortingStrategy = new SortingStrategyBubbleSort();
+        sortingStrategy.sort(sortedObjects, comparator);
+
+        // Should return empty list
+        assertEquals(0, sortedObjects.length);
+
+        // Comaparator shouldn't be used
+        verify(comparator, times(0)).compare(any(), any());
+    }
 }

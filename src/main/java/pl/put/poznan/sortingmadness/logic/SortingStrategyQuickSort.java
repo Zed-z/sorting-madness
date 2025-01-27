@@ -30,6 +30,11 @@ public class SortingStrategyQuickSort implements SortingStrategy {
      */
     private void InternalSort(SortedObject[] objects, Comparator comparator, int left, int right) {
 
+        // Fix for an edge case with an empty list, just return it
+        if (objects.length == 0) {
+            return;
+        }
+
         int i  = left;
         int j = right;
         SortedObject pivot = objects[((i + j) >> 1)];

@@ -101,8 +101,9 @@ public class SortingStrategySelectSortTest {
         assertEquals(3, objects[3].getValue());
     }
 
-
-
+    /**
+     * Test to check if comparator has been used enough times
+     */
     @Test
     void checkComparisonCount() {
 
@@ -133,7 +134,10 @@ public class SortingStrategySelectSortTest {
 
     }
 
-
+    /**
+     * Test to check if comparator has been used enough times
+     * This time with a step limit
+     */
     @Test
     void checkComparisonCountWithSteps() {
 
@@ -162,5 +166,25 @@ public class SortingStrategySelectSortTest {
 
         verify(comparator, times(7)).compare(any(), any());
 
+    }
+
+    /**
+     * Test for a potential edge case where an empty list is given
+     */
+    @Test
+    void emptyEdgeCaseTest() {
+        // Random comparator, doesn't matter
+        Comparator comparator = mock(Comparator.class);
+        when(comparator.compare(any(), any())).thenReturn(0);
+
+        SortedObjectInt[] sortedObjects = new SortedObjectInt[]{};
+        SortingStrategy sortingStrategy = new SortingStrategySelectSort();
+        sortingStrategy.sort(sortedObjects, comparator);
+
+        // Should return empty list
+        assertEquals(0, sortedObjects.length);
+
+        // Comaparator shouldn't be used
+        verify(comparator, times(0)).compare(any(), any());
     }
 }
