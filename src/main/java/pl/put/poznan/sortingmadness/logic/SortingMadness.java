@@ -59,7 +59,7 @@ public class SortingMadness {
 
         if (algorithms==null || algorithms.isEmpty()) {
             algorithms = new ArrayList<>();
-            algorithms.add(recommendStrategy());
+            algorithms.add(StrategyRecommender.recommendStrategy(sortedObjectClass, objects));
             logger.debug("Recommended sorting strategy: {}", algorithms.get(0));
         }
         for (String algorithm : algorithms) {
@@ -168,23 +168,7 @@ public class SortingMadness {
 
 
 
-    /**
-     * A function to recommend the sorting strategy to use base on data type and amount
-     * @return The name of the sort algorithm to use
-     */
-    public String recommendStrategy() {
-        if (sortedObjectClass == SortedObjectString.class) {
-            return "MergeSort";
-        }
 
-        if (objects.size() <= 10) {
-            return "InsertionSort";
-        } else if (objects.size() <= 100) {
-            return "QuickSort";
-        } else {
-            return "HeapSort";
-        }
-    }
 
     /**
      * Getter for the algorithms
